@@ -1,23 +1,27 @@
-SRCS			= philo.c \
-					check.c\
-					init_philo.c\
-					philo_utils.c\
-					death.c \
+NAME = philo
 
-NAME			= philo
-CC				= gcc
-CFLAGS			= -Wall -Wextra -Werror
+CC = cc
 
-all : $(NAME)
+CFLAGS = -Wall -Wextra -Werror
 
-$(NAME): $(SRCS)
-	$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
+INC = philo.h
 
+SRC = philo.c \
+		check.c\
+		init_philo.c\
+		philo_utils.c\
+		death.c \
+
+OBJ = $(SRC:.c=.o)
+
+all: $(NAME)
+	
+$(NAME):$(OBJ) $(INC)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	
 clean:
-
+	@rm -rf $(OBJ)
 fclean: clean
-	rm -f $(NAME)
+	@rm -rf $(NAME)
 
-re : fclean all
-
-.PHONY: re all fclean
+re: fclean all
